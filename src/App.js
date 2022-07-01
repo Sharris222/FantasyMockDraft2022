@@ -5,72 +5,104 @@ const INITIAL_LIST = [
   {
     id: 'person1',
     title: 'Jonathan Taylor',
-    amount: 12,
     position: 'RB',
     adp: 1
   },
   {
     id: 'person2',
-    amount: 15,
     title: 'Cooper Kupp',
     position: 'WR',
     adp: 2
   },
   {
     id: 'person3',
-    amount: 17,
     title: 'Austin Ekeler',
     position: 'RB',
     adp: 3
   },
   {
     id: 'person4',
-    amount: 0,
     title: 'Derrick Henry',
     position: 'RB',
     adp: 4
   },
   {
     id: 'person5',
-    amount: 1,
     title: 'Christian Mccaffrey',
     position: 'RB',
     adp: 5
   },
   {
     id: 'person6',
-    amount: 2,
     title: 'Najee Harris',
     position: 'RB',
     adp: 6
   },
   {
     id: 'person7',
-    amount: 3,
     title: 'Dalvin Cook',
     position: 'RB',
     adp: 7
   },
   {
     id: 'person8',
-    amount: 4,
     title: 'Justin Jefferson',
     position: 'WR',
     adp: 8
   },
   {
     id: 'person9',
-    amount: 5,
     title: 'Jamarr Chase',
     position: 'WR',
     adp: 9
   },
   {
     id: 'person10',
-    amount: 6,
     title: 'Joe Mixon',
     position: 'RB',
     adp: 10
+  },
+  {
+    id: 'person11',
+    title: 'Davante Adams',
+    position: 'WR',
+    adp: 11
+  },
+  {
+    id: 'person12',
+    title: 'Stefon Diggs',
+    position: 'WR',
+    adp: 12
+  },
+  {
+    id: 'person13',
+    title: 'Travis Kelce',
+    position: 'TE',
+    adp: 13
+  },
+  {
+    id: 'person14',
+    title: 'Alvin Kamara',
+    position: 'RB',
+    adp: 14
+  },
+  {
+    id: 'person15',
+    title: 'Tyreek Hill',
+    position: 'WR',
+    adp: 15
+  },
+  {
+    id: 'person16',
+    title: 'Deebo Samuel',
+    position: 'WR',
+    adp: 16
+  },
+  {
+    id: 'person17',
+    title: 'Aaron Jones',
+    position: 'RB',
+    adp: 17
   }
 ];
 
@@ -102,45 +134,42 @@ function App() {
   const [userPick, setUserPick] = useState(USER_PICK)
   const [currentRound, setCurrentRound] = useState(INITIAL_ROUND)
   console.log(currentPick)
-  console.log(currentRound)
-  if (currentPick < 151){
-  if (currentPick === 0){
+  if (currentPick == 0){
     
   }
-  else if (currentRound%2 != 0){
-    if (currentPick != (((currentRound - 1)*8) + userPick)){
+  else if (currentRound%2 == 1){
+    const userRoundPick = currentRound-1
+    if (currentPick != eval(userRoundPick*8)+eval(userPick)){
       let updatedArr = []
       for (let i = 1; i < people.length; i++){
           updatedArr.push(people[i])
       }
       setPeople(updatedArr)
-      if ((currentPick)%8 === 0){
+      if ((currentPick)%8 == 0){
         setCurrentRound(currentRound + 1)
       }
       setCurrentPick(currentPick+1)
     }
   }
   else{
-    if (currentPick != ((currentRound*8) - userPick + 1)){
+    if (currentPick != ((currentRound*8)-userPick+1)){
       let updatedArr = []
       for (let i = 1; i < people.length; i++){
           updatedArr.push(people[i])
       }
       setPeople(updatedArr)
-      if ((currentPick)%8 === 0){
-        setCurrentRound(currentRound + 1)
+      if ((currentPick)%8 == 0){
+        setCurrentRound(currentRound+1)
       }
       setCurrentPick(currentPick+1)
     }
   }
-}
-
   const handleRoundZero = (userChoice) => {
     setUserPick(userChoice)
     setCurrentPick(currentPick + 1)
   }
+
   const findDeletedPerson = (id) => {
-    console.log(currentPick)
     let updatedArr = [];
     for (let i = 0; i < people.length; i++){
       if (people[i].id != id){
@@ -310,7 +339,7 @@ function App() {
       if((currentPick)%8 == 0){
         setCurrentRound(currentRound+1)
       }
-      setCurrentPick(currentPick + 1);
+      setCurrentPick(currentPick+1);
   }
   
   return (
