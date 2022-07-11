@@ -135,38 +135,45 @@ function App() {
   const [currentPick, setCurrentPick] = useState(INITIAL_PICK_COUNTER)
   const [userPick, setUserPick] = useState(USER_PICK)
   const [currentRound, setCurrentRound] = useState(INITIAL_ROUND)
+  useEffect(()=>{
+    console.log(currentPick)
+    var currentTime = new Date().getTime();
 
-  console.log(currentPick)
-  if (currentPick == 0){
+   while (currentTime + 1000 >= new Date().getTime()) {
+   }
+    if (currentPick == 0){
     
-  }
-  else if (currentRound%2 == 1){
-    const userRoundPick = currentRound-1
-    if (currentPick != eval(userRoundPick*8)+eval(userPick)){
-      let updatedArr = []
-      for (let i = 1; i < people.length; i++){
-          updatedArr.push(people[i])
-      }
-      setPeople(updatedArr)
-      if ((currentPick)%8 == 0){
-        setCurrentRound(currentRound + 1)
-      }
-      setCurrentPick(currentPick+1)
     }
-  }
-  else{
-    if (currentPick != ((currentRound*8)-userPick+1)){
-      let updatedArr = []
-      for (let i = 1; i < people.length; i++){
-          updatedArr.push(people[i])
+    else if (currentRound%2 == 1){
+      const userRoundPick = currentRound-1
+      if (currentPick != eval(userRoundPick*8)+eval(userPick)){
+        let updatedArr = []
+        for (let i = 1; i < people.length; i++){
+            updatedArr.push(people[i])
+        }
+        setPeople(updatedArr)
+        if ((currentPick)%8 == 0){
+          setCurrentRound(currentRound + 1)
+        }
+        setCurrentPick(currentPick+1)
       }
-      setPeople(updatedArr)
-      if ((currentPick)%8 == 0){
-        setCurrentRound(currentRound+1)
-      }
-      setCurrentPick(currentPick+1)
     }
-  }
+    else{
+      if (currentPick != ((currentRound*8)-userPick+1)){
+        let updatedArr = []
+        for (let i = 1; i < people.length; i++){
+            updatedArr.push(people[i])
+        }
+        setPeople(updatedArr)
+
+        if ((currentPick)%8 == 0){
+          setCurrentRound(currentRound+1)
+        }
+        setCurrentPick(currentPick+1)
+      }
+    }
+  })
+  
   const handleRoundZero = (userChoice) => {
     setUserPick(userChoice)
     setCurrentPick(currentPick + 1)
@@ -339,6 +346,10 @@ function App() {
 
     }
       setPeople(updatedArr)
+      var currentTime = new Date().getTime();
+
+   while (currentTime + 1000 >= new Date().getTime()) {
+   }
       if((currentPick)%8 == 0){
         setCurrentRound(currentRound+1)
       }
