@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PeopleList from './components/PeopleList'
+import SelectPick from './components/SelectPick';
 
 const INITIAL_LIST = [
   {
@@ -127,12 +128,14 @@ const TEAM = {
 const INITIAL_PICK_COUNTER = 0;
 const USER_PICK = 7;
 const INITIAL_ROUND = 1;
+
 function App() {
   const [people, setPeople] = useState(INITIAL_LIST)
   const [team, setTeam] = useState(TEAM)
   const [currentPick, setCurrentPick] = useState(INITIAL_PICK_COUNTER)
   const [userPick, setUserPick] = useState(USER_PICK)
   const [currentRound, setCurrentRound] = useState(INITIAL_ROUND)
+
   console.log(currentPick)
   if (currentPick == 0){
     
