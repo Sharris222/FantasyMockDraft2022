@@ -1,6 +1,7 @@
 function Team(props){
 return(
-        <div>
+        <div class="col-sm">
+            <h1>Your Team:</h1>
             <h3>QB: {props.team.qb1}</h3>
             <h3>RB1: {props.team.rb1}</h3>
             <h3>RB2: {props.team.rb2}</h3>

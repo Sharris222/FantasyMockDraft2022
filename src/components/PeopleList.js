@@ -1,6 +1,5 @@
 import Person from './Person'
 import PositionFilter from './PositionFilter';
-import Team from './Team';
 import React, { useState } from 'react';
 import SelectPick from './SelectPick';
 
@@ -28,8 +27,7 @@ if (props.pick === 0){
   return <SelectPick userPickChoice={userPickChoice}></SelectPick>
 }
 return (
-    <div>
-      <Team team={props.team}></Team>
+    <div class="col-lg">
       <h1>Round {props.round}</h1>
       <PositionFilter updatePosition={updatePosition} position={filteredPosition}></PositionFilter>
       {filteredPeople.map(person => <Person key={person.id} title={person.title} amount={person.amount} adp={person.adp} id={person.id} deletedPerson={deletedPerson}> </Person>)}

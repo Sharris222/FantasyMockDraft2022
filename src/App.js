@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PeopleList from './components/PeopleList'
 import SelectPick from './components/SelectPick';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Team from './components/Team';
 
 const INITIAL_LIST = [
   {
@@ -135,6 +137,7 @@ function App() {
   const [currentPick, setCurrentPick] = useState(INITIAL_PICK_COUNTER)
   const [userPick, setUserPick] = useState(USER_PICK)
   const [currentRound, setCurrentRound] = useState(INITIAL_ROUND)
+  
   useEffect(()=>{
     console.log(currentPick)
     var currentTime = new Date().getTime();
@@ -143,6 +146,9 @@ function App() {
    }
     if (currentPick == 0){
     
+    }
+    else if (currentPick == -1){
+      setCurrentPick(1)
     }
     else if (currentRound%2 == 1){
       const userRoundPick = currentRound-1
@@ -176,7 +182,7 @@ function App() {
   
   const handleRoundZero = (userChoice) => {
     setUserPick(userChoice)
-    setCurrentPick(currentPick + 1)
+    setCurrentPick(-1)
   }
 
   const findDeletedPerson = (id) => {
@@ -356,9 +362,19 @@ function App() {
       setCurrentPick(currentPick+1);
   }
   
+  if (currentPick != 0){
   return (
+    <div class="container">
+    <div class="row">
     <PeopleList handleZero={handleRoundZero} pick={currentPick} round={currentRound} team={team} findDeletedPerson={findDeletedPerson} people={people}></PeopleList>
+    <Team team={team}></Team>
+    </div>
+    </div>
   );
+  }
+  else{
+    return (<PeopleList handleZero={handleRoundZero} pick={currentPick} round={currentRound} team={team} findDeletedPerson={findDeletedPerson} people={people}></PeopleList>);
+  }
 }
 
 export default App;

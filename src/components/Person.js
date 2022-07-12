@@ -5,12 +5,14 @@ function Person(props){
         props.deletedPerson(props.id)
     }
     return (
+        <div class="col-sm-4">
         <div className="expense-item">
             <PersonADP adp={props.adp}></PersonADP>
             <div className ="expense-item__description">
                 <h2>{props.title}</h2>
             </div>
             <button className ="button button2" onClick={clickHandler}>DRAFT</button>
+        </div>
         </div>
     );
 }
