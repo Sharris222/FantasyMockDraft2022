@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'; 
 import PeopleList from './components/PeopleList'
 import SelectPick from './components/SelectPick';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -127,6 +127,139 @@ const TEAM = {
   be6: ''
 }
 
+const COMPUTER1 = {
+  id: 1,
+  qb1: '',
+  wr1: '',
+  wr2: '',
+  rb1: '',
+  rb2: '',
+  flx: '',
+  te: '',
+  def: '',
+  k: '',
+  be1: '',
+  be2: '',
+  be3: '',
+  be4: '',
+  be5: '',
+  be6: ''
+}
+
+const COMPUTER2 = {
+  id: 2,
+  qb1: '',
+  wr1: '',
+  wr2: '',
+  rb1: '',
+  rb2: '',
+  flx: '',
+  te: '',
+  def: '',
+  k: '',
+  be1: '',
+  be2: '',
+  be3: '',
+  be4: '',
+  be5: '',
+  be6: ''
+}
+
+const COMPUTER3 = {
+  id: 3,
+  qb1: '',
+  wr1: '',
+  wr2: '',
+  rb1: '',
+  rb2: '',
+  flx: '',
+  te: '',
+  def: '',
+  k: '',
+  be1: '',
+  be2: '',
+  be3: '',
+  be4: '',
+  be5: '',
+  be6: ''
+}
+
+const COMPUTER4 = {
+  id: 4,
+  qb1: '',
+  wr1: '',
+  wr2: '',
+  rb1: '',
+  rb2: '',
+  flx: '',
+  te: '',
+  def: '',
+  k: '',
+  be1: '',
+  be2: '',
+  be3: '',
+  be4: '',
+  be5: '',
+  be6: ''
+}
+
+const COMPUTER5 = {
+  id: 5,
+  qb1: '',
+  wr1: '',
+  wr2: '',
+  rb1: '',
+  rb2: '',
+  flx: '',
+  te: '',
+  def: '',
+  k: '',
+  be1: '',
+  be2: '',
+  be3: '',
+  be4: '',
+  be5: '',
+  be6: ''
+}
+
+const COMPUTER6 = {
+  id: 6,
+  qb1: '',
+  wr1: '',
+  wr2: '',
+  rb1: '',
+  rb2: '',
+  flx: '',
+  te: '',
+  def: '',
+  k: '',
+  be1: '',
+  be2: '',
+  be3: '',
+  be4: '',
+  be5: '',
+  be6: ''
+}
+const COMPUTER7 = {
+  id: 7,
+  qb1: '',
+  wr1: '',
+  wr2: '',
+  rb1: '',
+  rb2: '',
+  flx: '',
+  te: '',
+  def: '',
+  k: '',
+  be1: '',
+  be2: '',
+  be3: '',
+  be4: '',
+  be5: '',
+  be6: ''
+}
+
+const SELECTIONS_ARR = [COMPUTER1, COMPUTER2, COMPUTER3, COMPUTER4, COMPUTER5, COMPUTER6, COMPUTER7]
 const INITIAL_PICK_COUNTER = 0;
 const USER_PICK = 7;
 const INITIAL_ROUND = 1;
@@ -134,14 +267,233 @@ const INITIAL_ROUND = 1;
 function App() {
   const [people, setPeople] = useState(INITIAL_LIST)
   const [team, setTeam] = useState(TEAM)
+  const [selections, setSelections] = useState(SELECTIONS_ARR)
   const [currentPick, setCurrentPick] = useState(INITIAL_PICK_COUNTER)
   const [userPick, setUserPick] = useState(USER_PICK)
   const [currentRound, setCurrentRound] = useState(INITIAL_ROUND)
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [previousIndex, setPreviousIndex] = useState(0)
+  const [previousPlayer, setPreviousPlayer] = useState('')
+
+  const determineNextIndex = () => {
+    if (currentIndex == 0 && previousIndex == 0){
+      setCurrentIndex(currentIndex + 1)
+    }
+    else if (currentIndex == 0 && previousIndex == 1){
+      setPreviousIndex(0)
+    }
+    else if (currentIndex == 6 && previousIndex == 6){
+      setCurrentIndex(currentIndex - 1)
+    }
+    else if (currentIndex == 6 && previousIndex == 5){
+      setPreviousIndex(6)
+    }
+    else if (currentIndex < previousIndex){
+      setCurrentIndex(currentIndex - 1)
+      setPreviousIndex(previousIndex -1)
+    }
+    else{
+      setCurrentIndex(currentIndex + 1)
+      setPreviousIndex(previousIndex + 1)
+    }
+  }
+
+  const findNextPlayer = (team, people) => {
+    let playerId = ''
+    const randomNum = Math.random()*10
+    for (let i = 0; i < people.length; i++){
+      const player = people[i]
+        if (player.position === 'WR'){
+          if (team.wr1 === ''){
+            if (team.rb1 === '' && 100 > 7){
+              playerId = player.id
+              team.wr1 = player.title
+            }
+            else if (team.rb2 === '' && 100 > 3){
+              playerId = player.id
+              team.wr1 = player.title
+            }
+            else if (team.rb1 != '' & team.rb2 != '' && team.flex === '' && 100 > 1){
+              playerId = player.id
+              team.wr1 = player.title
+            }
+            else if (team.rb1 != '' && team.rb2 != '' && team.flex != '' && 100 > 1){
+              playerId = player.id
+              team.wr1 = player.title
+            }
+          }
+          else if (team.wr2 === ''){
+            if (team.rb1 === '' && 100 > 7){
+              playerId = player.id
+              team.wr2 = player.title
+            }
+            else if (team.rb2 === '' && 100 > 3){
+              playerId = player.id
+              team.wr2 = player.title
+            }
+            else if (team.rb1 != '' & team.rb2 != '' && team.flex === '' && 100 > 1){
+              playerId = player.id
+              team.wr2 = player.title
+            }
+            else if (team.rb1 != '' && team.rb2 != '' && team.flex != '' && 100 > 1){
+              playerId = player.id
+              team.wr2 = player.title
+            }
+          }
+          else if (team.flx === ''){
+            if (team.rb1 === '' && 100 > 8){
+              playerId = player.id
+              team.flx = player.title
+            }
+            else if (team.rb2 === '' && 100 > 5){
+              playerId = player.id
+              team.flx = player.title
+            }
+            else if (team.rb1 != '' & team.rb2 != '' && 100 > 1){
+              playerId = player.id
+              team.flx = player.title
+            }
+          }
+          else if (team.be1 === '' && team.rb1 != '' && team.rb2 != '' && team.qb1 != '' && team.te != '' && 100 > 3){
+            playerId = player.id
+            team.be1 = player.title
+          }
+          else if (team.be2 === '' && team.rb1 != '' && team.rb2 != '' && team.qb1 != '' && team.te != '' && 100 > 3){
+            playerId = player.id
+            team.be2 = player.title
+          }
+          else if (team.be3 === '' && team.rb1 != '' && team.rb2 != '' && team.qb1 != '' && team.te != '' && 100 > 3){
+            playerId = player.id
+            team.be3 = player.title
+          }
+          else if (team.be4 === '' && team.rb1 != '' && team.rb2 != '' && team.qb1 != '' && team.te != '' && 100 > 3){
+            playerId = player.id
+            team.be4 = player.title
+          }
+          else if (team.be5 === '' && team.rb1 != '' && team.rb2 != '' && team.qb1 != '' && team.te != '' && 100 > 3){
+            playerId = player.id
+            team.be5 = player.title
+          }
+          else if (team.be6 === '' && team.rb1 != '' && team.rb2 != '' && team.qb1 != '' && team.te != '' && 100 > 3){
+            playerId = player.id
+            team.be6 = player.title
+          }
+        }
+        else if (player.position === 'RB'){
+          if (team.rb1 === ''){
+            if (team.wr1 === '' && 100 > 2){
+              playerId = player.id
+              team.rb1 = player.title
+            }
+            else if (team.wr2 === '' && 100 > 2){
+              playerId = player.id
+              team.rb1 = player.title
+            }
+            else if (team.wr1 != '' & team.wr2 != '' && team.flex === '' && 100 > 1){
+              playerId = player.id
+              team.rb1 = player.title
+            }
+            else if (team.wr1 != '' && team.wr2 != '' && team.flex != '' && 100 > 1){
+              playerId = player.id
+              team.rb1 = player.title
+            }
+          }
+          else if (team.rb2 === ''){
+            if (team.wr1 === '' && 100 > 7){
+              playerId = player.id
+              team.rb2 = player.title
+            }
+            else if (team.wr2 === '' && 100 > 5){
+              playerId = player.id
+              team.rb2 = player.title
+            }
+            else if (team.wr1 != '' & team.wr2 != '' && team.flex === '' && 100 > 1){
+              playerId = player.id
+              team.rb2 = player.title
+            }
+            else if (team.wr1 != '' && team.wr2 != '' && team.flex != '' && 100 > 1){
+              playerId = player.id
+              team.rb2 = player.title
+            }
+          }
+          else if (team.flx === ''){
+            if (team.wr1 === '' && 100 > 8){
+              playerId = player.id
+              team.flx = player.title
+            }
+            else if (team.wr2 === '' && 100 > 5){
+              playerId = player.id
+              team.flx = player.title
+            }
+            else if (team.wr1 != '' & team.wr2 != '' && 100 > 1){
+              playerId = player.id
+              team.flx = player.title
+            }
+          }
+          else if (team.be1 === '' && team.wr1 != '' && team.wr2 != '' && team.qb1 != '' && team.te != ''){
+            playerId = player.id
+            team.be1 = player.title
+          }
+          else if (team.be2 === '' && team.wr1 != '' && team.wr2 != '' && team.qb1 != '' && team.te != ''){
+            playerId = player.id
+            team.be2 = player.title
+          }
+          else if (team.be3 === '' && team.wr1 != '' && team.wr2 != '' && team.qb1 != '' && team.te != ''){
+            playerId = player.id
+            team.be3 = player.title
+          }
+          else if (team.be4 === '' && team.wr1 != '' && team.wr2 != '' && team.qb1 != '' && team.te != ''){
+            playerId = player.id
+            team.be4 = player.title
+          }
+          else if (team.be5 === '' && team.wr1 != '' && team.wr2 != '' && team.qb1 != '' && team.te != ''){
+            playerId = player.id
+            team.be5 = player.title
+          }
+          else if (team.be6 === '' && team.wr1 != '' && team.wr2 != '' && team.qb1 != '' && team.te != ''){
+            playerId = player.id
+            team.be6 = player.title
+          }
+        }
+        else if (player.position === 'TE'){
+          if (team.te === ''){
+            playerId = player.id
+            team.te = player.title
+          }
+          else if (team.flx === ''){
+            playerId = player.id
+            team.flx = player.title
+          }
+        }
+        else if (player.position === 'QB'){
+          if (team.qb1 === ''){
+            playerId = player.id
+            team.qb1= player.title
+          }
+        }
+        else if (player.position === 'DEF'){
+          if (team.def === ''){
+            playerId = player.id
+            team.def = player.title
+          }
+        }
+        else if (player.position === 'K'){
+          if (team.k === ''){
+            playerId = player.id
+            team.k = player.title
+          }
+        }
+
+        if (playerId != ''){
+          break
+        }
+    }
+    return playerId
+  }
   
   useEffect(()=>{
-    console.log(currentPick)
     var currentTime = new Date().getTime();
-
+    console.log(currentIndex)
    while (currentTime + 1000 >= new Date().getTime()) {
    }
     if (currentPick == 0){
@@ -153,29 +505,45 @@ function App() {
     else if (currentRound%2 == 1){
       const userRoundPick = currentRound-1
       if (currentPick != eval(userRoundPick*8)+eval(userPick)){
+        const playerIdentity = findNextPlayer(selections[currentIndex], people)
         let updatedArr = []
-        for (let i = 1; i < people.length; i++){
+        for (let i = 0; i < people.length; i++){
+          if (people[i].id != playerIdentity){
             updatedArr.push(people[i])
+          }
+          else{
+            setPreviousPlayer(people[i].title)
+          }
         }
+        setSelections(selections)
         setPeople(updatedArr)
         if ((currentPick)%8 == 0){
           setCurrentRound(currentRound + 1)
         }
         setCurrentPick(currentPick+1)
+        determineNextIndex()
       }
     }
     else{
       if (currentPick != ((currentRound*8)-userPick+1)){
+        const playerIdentity = findNextPlayer(selections[currentIndex], people)
+        console.log(playerIdentity)
         let updatedArr = []
-        for (let i = 1; i < people.length; i++){
+        for (let i = 0; i < people.length; i++){
+          if (people[i].id != playerIdentity){
             updatedArr.push(people[i])
+          } 
+          else{
+            setPreviousPlayer(people[i].title)
+          }
         }
+        setSelections(selections)
         setPeople(updatedArr)
-
         if ((currentPick)%8 == 0){
           setCurrentRound(currentRound+1)
         }
         setCurrentPick(currentPick+1)
+        determineNextIndex()
       }
     }
   })
@@ -348,6 +716,7 @@ function App() {
           }
         }
         setTeam(updatedTeam)
+        setPreviousPlayer(player.title)
         }
 
     }
@@ -366,7 +735,7 @@ function App() {
   return (
     <div class="container">
     <div class="row">
-    <PeopleList handleZero={handleRoundZero} pick={currentPick} round={currentRound} team={team} findDeletedPerson={findDeletedPerson} people={people}></PeopleList>
+    <PeopleList previousPick={previousPlayer} handleZero={handleRoundZero} pick={currentPick} round={currentRound} team={team} findDeletedPerson={findDeletedPerson} people={people}></PeopleList>
     <Team team={team}></Team>
     </div>
     </div>

@@ -29,6 +29,7 @@ if (props.pick === 0){
 return (
     <div class="col-lg">
       <h1>Round {props.round}</h1>
+      <h3>Previous Pick: {props.previousPick}</h3>
       <PositionFilter updatePosition={updatePosition} position={filteredPosition}></PositionFilter>
       {filteredPeople.map(person => <Person key={person.id} title={person.title} amount={person.amount} adp={person.adp} id={person.id} deletedPerson={deletedPerson}> </Person>)}
     </div>
